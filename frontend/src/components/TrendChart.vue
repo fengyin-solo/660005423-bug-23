@@ -15,7 +15,8 @@ function update() {
     yAxis:{type:'value',axisLabel:{color:'#94a3b8'}},
     series:[{
       type:'bar',data:ws.map(w=>w.count),itemStyle:{color:'#38bdf8'},
-      markLine:{data:[{type:'average',name:'avg'}],lineStyle:{color:'#f97316',type:'dashed'},label:{color:'#f97316'}}
+      markLine:{data:[{type:'average',name:'avg'}],lineStyle:{color:'#f97316',type:'dashed'},label:{color:'#f97316'}},
+      markPoint:{symbol:'pin',symbolSize:36,itemStyle:{color:'#ef4444'},label:{color:'#fff',fontSize:9},data:store.result.anomalies.filter(a=>a.isAnomaly).map(a=>({coord:[a.windowIndex,ws[a.windowIndex]?.count ?? 0],name:'异常',value:'异'}))}
     }],animation:false
   })
 }

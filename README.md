@@ -5,6 +5,35 @@
 ## 目标用户
 SRE工程师、DevOps团队、系统运维人员
 
+## 本地启动
+
+后端地址统一由 `frontend/.env` 配置，开发服务和构建产物都从同一份文件读取。默认配置为：
+
+```env
+VITE_API_BASE_URL=http://localhost:8000
+```
+
+如果后端改用其他端口（例如 8001），只需把上面的地址改成实际地址。
+
+```bash
+# 后端（端口需与 frontend/.env 的 VITE_API_BASE_URL 保持一致）
+cd backend
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8000
+
+# 前端
+cd frontend
+npm install
+npm run dev
+```
+
+生产构建同样读取当前的 `.env` 或构建时注入的 `VITE_API_BASE_URL`：
+
+```bash
+cd frontend
+npm run build
+```
+
 ## 技术栈
 - 前端: Vue 3 + TypeScript + Vite + Pinia + Element Plus + ECharts
 - 后端: Python FastAPI + NumPy + SQLite + WebSocket

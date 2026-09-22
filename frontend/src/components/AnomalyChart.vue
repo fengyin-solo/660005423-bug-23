@@ -14,8 +14,35 @@ function update() {
     xAxis:{type:'category',data:anoms.map(a=>'W'+a.windowIndex),axisLabel:{color:'#94a3b8',fontSize:9}},
     yAxis:{type:'value',axisLabel:{color:'#94a3b8'}},
     series:[
-      {type:'line',data:anoms.map(a=>a.sigmaScore),name:'3-sigma',itemStyle:{color:'#f97316'},lineStyle:{width:1.5}},
-      {type:'line',data:anoms.map(a=>a.iqrScore),name:'IQR',itemStyle:{color:'#a78bfa'},lineStyle:{width:1.5}}
+      {
+        type:'line',
+        data:anoms.map(a=>a.sigmaScore),
+        name:'3-sigma',
+        showSymbol:true,
+        symbol:'circle',
+        symbolSize:6,
+        itemStyle:{color:'#f97316'},
+        lineStyle:{width:1.5}
+      },
+      {
+        type:'line',
+        data:anoms.map(a=>a.iqrScore),
+        name:'IQR',
+        showSymbol:true,
+        symbol:'circle',
+        symbolSize:6,
+        itemStyle:{color:'#a78bfa'},
+        lineStyle:{width:1.5}
+      },
+      {
+        type:'scatter',
+        data:anoms.filter(a=>a.isAnomaly).map(a=>['W'+a.windowIndex,Math.max(a.sigmaScore,a.iqrScore)]),
+        name:'异常标记',
+        symbol:'diamond',
+        symbolSize:10,
+        itemStyle:{color:'#ef4444'},
+        z:5
+      }
     ],animation:false,legend:{right:0,textStyle:{color:'#94a3b8',fontSize:10}}
   })
 }
