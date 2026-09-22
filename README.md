@@ -9,6 +9,17 @@ SRE工程师、DevOps团队、系统运维人员
 - 前端: Vue 3 + TypeScript + Vite + Pinia + Element Plus + ECharts
 - 后端: Python FastAPI + NumPy + SQLite + WebSocket
 
+## 接口地址配置
+前端接口地址统一收拢在 `frontend/.env`（模板：`frontend/.env.example`）：
+
+```
+VITE_API_BASE_URL=http://localhost:8000
+```
+
+- 本地开发（`npm run dev`）与构建（`npm run build`）都从该变量取值，保持一致
+- 后端换端口启动时只需改这一处，例如 `http://localhost:18000`
+- 接口不通时页面顶部会显示具体原因与重试按钮
+
 ## 核心功能
 1. 多源日志流接入：支持Apache/NGINX/应用JSON/自定义格式四种日志类型模拟
 2. 正则/Grok日志解析引擎：自动提取timestamp/level/source/message字段
